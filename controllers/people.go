@@ -55,10 +55,13 @@ func GetPerson(c *gin.Context) {
 func GetPeople(c *gin.Context) {
     var people []models.Person
     var getDB = db.GetDB()
-    if err := getDB.Find(&people).Error; err != nil {
+    var p = page(c)
+    if err := getDB.Limit(PaginationLimit).Offset(p*PaginationLimit).Find(&people).Error; err != nil {
         c.AbortWithStatus(404)
         fmt.Println(err)
     } else {
         c.JSON(200, people)
     }
 }
+
+

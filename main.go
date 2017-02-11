@@ -17,7 +17,7 @@ func main() {
 
     v1 := r.Group("/v1")
     {
-        v1.GET("/people/", controllers.GetPeople)
+        v1.GET("/people", controllers.GetPeople)
         v1.GET("/people/:id", controllers.GetPerson)
         v1.POST("/people", controllers.CreatePerson)
         v1.PUT("/people/:id", controllers.UpdatePerson)
