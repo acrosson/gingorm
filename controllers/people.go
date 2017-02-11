@@ -3,7 +3,6 @@ package controllers
 import (
     "fmt"
     "github.com/gin-gonic/gin"
-    _ "github.com/go-sql-driver/mysql"
     "github.com/alexandercrosson/gingorm/db"
     "github.com/alexandercrosson/gingorm/models"
 )
