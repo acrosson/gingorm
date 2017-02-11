@@ -15,11 +15,16 @@ func main() {
     db.Init()
 
     r := gin.Default()
-    r.GET("/people/", controllers.GetPeople)
-    r.GET("/people/:id", controllers.GetPerson)
-    r.POST("/people", controllers.CreatePerson)
-    r.PUT("/people/:id", controllers.UpdatePerson)
-    r.DELETE("/people/:id", controllers.DeletePerson)
+
+    v1 := r.Group("/v1")
+    {
+        v1.GET("/people/", controllers.GetPeople)
+        v1.GET("/people/:id", controllers.GetPerson)
+        v1.POST("/people", controllers.CreatePerson)
+        v1.PUT("/people/:id", controllers.UpdatePerson)
+        v1.DELETE("/people/:id", controllers.DeletePerson)
+    }
+
     r.Run(":8080")
 
     defer db.CloseDB()
