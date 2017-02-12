@@ -5,6 +5,7 @@ import (
     "github.com/gin-gonic/gin"
     "github.com/alexandercrosson/gingorm/db"
     "github.com/alexandercrosson/gingorm/controllers"
+    "github.com/alexandercrosson/gingorm/middlewares"
 )
 
 func main() {
@@ -16,6 +17,7 @@ func main() {
     r := gin.Default()
 
     v1 := r.Group("/v1")
+    v1.Use(middlewares.AuthHandler())
     {
         v1.GET("/people", controllers.GetPeople)
         v1.GET("/people/:id", controllers.GetPerson)
@@ -23,6 +25,8 @@ func main() {
         v1.PUT("/people/:id", controllers.UpdatePerson)
         v1.DELETE("/people/:id", controllers.DeletePerson)
     }
+
+    r.GET("/auth", controllers.Auth)
 
     r.Run(":8080")
 

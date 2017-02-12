@@ -53,6 +53,11 @@ func GetPerson(c *gin.Context) {
 }
 
 func GetPeople(c *gin.Context) {
+    // Get userId from Authorization token
+    userId := c.MustGet("userId").(string)
+    fmt.Print("User Id : ")
+    fmt.Println(userId)
+
     var people []models.Person
     var getDB = db.GetDB()
     var p = page(c)
@@ -63,5 +68,6 @@ func GetPeople(c *gin.Context) {
         c.JSON(200, people)
     }
 }
+
 
 
